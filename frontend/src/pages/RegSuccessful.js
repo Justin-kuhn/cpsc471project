@@ -9,8 +9,6 @@ const RegSuccessful = () => {
     <button onClick={() => navigate("/")}>Start Shopping!</button>
     <button onClick={() => navigate("/Account")}>Manage your account</button>
 
-    
-
     </>
     )
   };

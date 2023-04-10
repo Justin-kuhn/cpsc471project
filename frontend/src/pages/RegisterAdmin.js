@@ -6,7 +6,7 @@ const RegisterAdmin = () => {
     const [inputs, setInputs] = useState({});
 
     const navigate = useNavigate();
-    
+
     const handleChange = (event) => {
       const name = event.target.name;
       const value = event.target.value;
@@ -15,10 +15,9 @@ const RegisterAdmin = () => {
   
     const handleSubmit = (event) => {
       event.preventDefault();
-      alert(inputs);
       // SHOULD CHANGE HOW IT HANDLES !!
       
-      navigate("/RegSuccessful");
+      navigate("/RegSuccessful"); // success message page
       
     }
 

@@ -1,7 +1,11 @@
 import {useState } from 'react';
+import {useNavigate } from "react-router-dom";
+
 
 const LoginAdmin = () => {
     const [inputs, setInputs] = useState({});
+    const navigate = useNavigate();
+
 
     const handleChange = (event) => {
       const name = event.target.name;
@@ -11,8 +15,10 @@ const LoginAdmin = () => {
   
     const handleSubmit = (event) => {
       event.preventDefault();
-      alert(inputs);
         // SHOULD CHANGE HOW IT HANDLES !!
+
+        navigate("/"); // redirects to homepage
+
     }
 
     return (

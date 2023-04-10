@@ -5,7 +5,7 @@ import {useNavigate } from "react-router-dom";
 const RegisterCustomer = () => {
     const [inputs, setInputs] = useState({});
     
-    const navigate = useNavigate();
+    const navigate = useNavigate(); // success message page
 
     const handleChange = (event) => {
       const name = event.target.name;
