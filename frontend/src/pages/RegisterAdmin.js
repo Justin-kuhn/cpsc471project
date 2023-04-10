@@ -1,8 +1,12 @@
 import {useState } from 'react';
+import {useNavigate } from "react-router-dom";
+
 
 const RegisterAdmin = () => {
     const [inputs, setInputs] = useState({});
 
+    const navigate = useNavigate();
+    
     const handleChange = (event) => {
       const name = event.target.name;
       const value = event.target.value;
@@ -12,7 +16,10 @@ const RegisterAdmin = () => {
     const handleSubmit = (event) => {
       event.preventDefault();
       alert(inputs);
-        // SHOULD CHANGE HOW IT HANDLES !!
+      // SHOULD CHANGE HOW IT HANDLES !!
+      
+      navigate("/RegSuccessful");
+      
     }
 
     return (

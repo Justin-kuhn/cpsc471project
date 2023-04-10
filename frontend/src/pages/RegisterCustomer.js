@@ -1,7 +1,11 @@
 import {useState } from 'react';
+import {useNavigate } from "react-router-dom";
+
 
 const RegisterCustomer = () => {
     const [inputs, setInputs] = useState({});
+    
+    const navigate = useNavigate();
 
     const handleChange = (event) => {
       const name = event.target.name;
@@ -13,6 +17,8 @@ const RegisterCustomer = () => {
       event.preventDefault();
       alert(inputs);
         // SHOULD CHANGE HOW IT HANDLES !!
+
+        navigate("/RegSuccessful");
     }
 
     return (

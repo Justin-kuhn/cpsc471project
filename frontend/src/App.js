@@ -9,6 +9,8 @@ import LoginCustomer from './pages/LoginCustomer';
 import NoPage from './pages/NoPage';
 import RegisterCustomer from './pages/RegisterCustomer';
 import RegisterAdmin from './pages/RegisterAdmin';
+import RegSuccessful from './pages/RegSuccessful';
+import Account from './pages/Account';
 
 
 function App() {
@@ -23,6 +25,8 @@ function App() {
             <Route path="Register" element={<Register />} />
               <Route path="RegisterAdmin" element={<RegisterAdmin />} />
               <Route path="RegisterCustomer" element={<RegisterCustomer />} />
+              <Route path="RegSuccessful" element={<RegSuccessful />} />
+              <Route path="Account" element={<Account />} />
             <Route path="*" element={<NoPage />} />
 
         </Route>
