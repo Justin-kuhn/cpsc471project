@@ -1,41 +1,88 @@
+const db = require('../db/DB-Controller');
+
 /*
   All functionality for commands related to users
+  This is where the data from the http requests are processed
 */
 
 //Registers a new user, has to have unique username
 const registerUser = async (req, res) => {
     try {
-      const { username, password } = req.body;
-
-      /* Replace with checking if user is in mysql database
-      const userInDb = await db.User.findOne({ username: username });
-      if (userInDb) {
-        return res.status(409).json({ message: "Username already exists" });
-      } 
-  
-      bcrypt.hash(password, 8, async function (err, hash) {
-        const newUser = await db.User.create({
-          admin: false,
-          username,
-          password: hash,
-          profilePicture: process.env.DEFAULT_IMAGE_URL,
-          dateOfBirth: dateOfBirth,
-          dateCreated: new Date(),
-        });
-        newUser.save();
-        if (err) {
-          return res.status(500).json({ message: err.message });
-        } 
-        res.status(201).json({ validReg: true });
-      }); */
-
+      const { username, password, email, fname, lname, age, gender, phone } = req.body;
+      db.registerCustomerAccount(username, password, email, fname,
+        lname, age, gender, phone);
       res.status(201).json({ validReg: true });
-      
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: error.message });
     }
   };
 
+//Registers a new admin, has to have unique username
+const registerAdmin = async (req, res) => {
+  try {
+    const { username, password, email, fname, lname, age, gender, phone, position } = req.body;
+    db.registerAdminAccount(username, password, email, fname,
+      lname, age, gender, phone, position);
+    res.status(201).json({ validReg: true });
+  } catch (error) {
+      console.log(error);
+      res.status(500).json({ message: error.message });
+  }
+};
+
+  //Logins an exisitng user, according to request body.
+const loginUser = async (req, res) => {
+  try{
+    const { username, password, email } = req.body;
+    const valid = await db.logIn(username, password, email);
+    if(!valid)
+    {
+      return res.status(401).json({ message: "The username or password is incorrect" });
+    }
+    res.status(200).json({ message: "Login successful" });
+  }
+  catch(error){
+    res.status(500).json({ message: error.message });
+  }
+};
+
+//Gets all brand names in the db
+const getBrands = async (req, res) => {
+  try{
+    const brands = await db.getBrands();
+    console.log(brands);
+    if(!brands)
+    {
+      return res.status(404).json({ message: "No brands in the database" });
+    }
+    res.status(200).json(brands);
+  }
+  catch(error){
+    res.status(500).json({ message: error.message });
+  }
+};
+
+//Gets all departments in the db
+const getDepartments = async (req, res) => {
+  try{
+    const departments = await db.getDepartments();
+    console.log(departments);
+    if(!departments)
+    {
+      return res.status(404).json({ message: "No departents in the database" });
+    }
+    res.status(200).json(departments);
+  }
+  catch(error){
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
-    registerUser
+    registerUser,
+    registerAdmin,
+    loginUser,
+    getBrands,
+    getDepartments
   };
