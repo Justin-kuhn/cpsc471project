@@ -1,38 +1,24 @@
 import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Layout from "./pages/Layout";
-import Home from "./pages/Home";
-import Register from './pages/Register';
-import Login from './pages/Login';
-import LoginAdmin from './pages/LoginAdmin';
-import LoginCustomer from './pages/LoginCustomer';
-import NoPage from './pages/NoPage';
-import RegisterCustomer from './pages/RegisterCustomer';
-import RegisterAdmin from './pages/RegisterAdmin';
-import RegSuccessful from './pages/RegSuccessful';
-import Account from './pages/Account';
 
+import Login from "../src/components/Login.jsx"; 
+import Register from "../src/components/Register.jsx"; 
+import RegisterAdmin from "../src/components/RegisterAdmin.jsx"; 
+import Home from "../src/components/Home.jsx"; 
+//import DepartmentFeed from "../src/components/DepartmentFeed.jsx"; 
+//<Route path="/department/:dname" element={<DepartmentFeed />} /> 
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="Login" element={<Login />} />
-              <Route path="LoginAdmin" element={<LoginAdmin />} />
-              <Route path="LoginCustomer" element={<LoginCustomer />} />
-            <Route path="Register" element={<Register />} />
-              <Route path="RegisterAdmin" element={<RegisterAdmin />} />
-              <Route path="RegisterCustomer" element={<RegisterCustomer />} />
-              <Route path="RegSuccessful" element={<RegSuccessful />} />
-              <Route path="Account" element={<Account />} />
-            <Route path="*" element={<NoPage />} />
+const App = () => (
 
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
-}
+  <BrowserRouter>
+    <Routes>
+      <Route path="/login" exact element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/registerAdmin" element={<RegisterAdmin />} />
+      <Route path="/home" element={<Home />} />
+      
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;

@@ -33,10 +33,15 @@ CREATE TABLE Product(
 	Quantity int,
 	InStock boolean,
 	BrandName varchar(128),
+	FileName varchar(64),
 	PRIMARY KEY (ItemID),
 	FOREIGN KEY (BrandName) REFERENCES Brand(BrandName),
 	FOREIGN KEY (DepartmentName) REFERENCES Department(DName)
 );
+
+insert into Product(ItemID, DepartmentName, ItemDescription, Class, Category, Price, Quantity, InStock, BrandName, FileName)
+values 
+(1, "Appliances", "Black and silver extra-wide slotted toaster, 4 slices", "Toaster", "Cooking", 39.99, 1, true, "Earthquake", "black-silver-toaster.png");
 
 DROP TABLE IF EXISTS Product_SKU;
 CREATE TABLE Product_SKU(
@@ -113,6 +118,8 @@ CREATE TABLE Dept_Categories(
 	FOREIGN KEY (DName) REFERENCES Department(DName)
 );
 
+insert into Dept_Categories(DCategories, Dname) values ("Cooking", "Appliances");
+
 DROP TABLE IF EXISTS ReturnRequest;
 CREATE TABLE ReturnRequest(
 	ReturnID int NOT NULL,
@@ -132,7 +139,16 @@ CREATE TABLE Account(
 	Password varchar(255),
 	IsBanned boolean,
 	PRIMARY KEY (Username),
-	FOREIGN KEY (Email) REFERENCES Customer(Email),
+	FOREIGN KEY (Email) REFERENCES Customer(Email)
+);
+
+DROP TABLE IF EXISTS AdminAccount;
+CREATE TABLE AdminAccount(
+	Username varchar(32) NOT NULL,
+	Email varchar(128) NOT NULL,
+	Password varchar(255),
+	IsBanned boolean,
+	PRIMARY KEY (Username),
 	FOREIGN KEY (Email) REFERENCES `Admin`(Email)
 );
 
