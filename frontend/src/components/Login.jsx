@@ -30,7 +30,7 @@ function Login() {
         <title>Login Page</title>
       </head>
       <body>
-        <h1>Login</h1>
+        <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div class="username-field">
           <label for="username">Username:</label>

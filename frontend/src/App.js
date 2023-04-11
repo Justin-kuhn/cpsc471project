@@ -4,8 +4,7 @@ import Login from "../src/components/Login.jsx";
 import Register from "../src/components/Register.jsx"; 
 import RegisterAdmin from "../src/components/RegisterAdmin.jsx"; 
 import Home from "../src/components/Home.jsx"; 
-//import DepartmentFeed from "../src/components/DepartmentFeed.jsx"; 
-//<Route path="/department/:dname" element={<DepartmentFeed />} /> 
+import DepartmentFeed from "../src/components/DepartmentFeed.jsx"; 
 
 const App = () => (
 
@@ -15,7 +14,7 @@ const App = () => (
       <Route path="/register" element={<Register />} />
       <Route path="/registerAdmin" element={<RegisterAdmin />} />
       <Route path="/home" element={<Home />} />
-      
+      <Route path="/department/:dname" element={<DepartmentFeed />} /> 
     </Routes>
   </BrowserRouter>
 );

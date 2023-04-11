@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import './styles/Home.css';
+import { useParams } from "react-router-dom";
+import './styles/DepartmentFeed.css';
 
 import {
   fetchFromAPI,
 } from "../utils/fetchFromApi";
 
-function Home() { 
+function DepartmentFeed() { 
+  const { dname } = useParams();
   const [brands, setBrands] = useState([]);
   const [departments, setDepartments] = useState([]);
 
@@ -27,15 +29,15 @@ function Home() {
   };
 
   const clear = () => {
-    window.location.href = "./login";
+    window.location.href = "http://localhost:3000/login";
     sessionStorage.clear();
   }
 
   return (
-    //HTML for the Home page
-    <div class="home">
+    //HTML for the Department feed
+    <div class="departmentFeed">
       <head>
-      <link rel="stylesheet" href="./styles/Home.css"></link>
+      <link rel="stylesheet" href="./styles/DepartmentFeed.css"></link>
         <title>Home Page</title>
       </head>
       <body>
@@ -76,9 +78,40 @@ function Home() {
   Not logged in
 </p>
 }
+<div class="department-text">
+<h1>
+  {`Department: ${dname}`}
+</h1>
+</div>
+<div id="catalogue">
+  <div class="card">
+    <img src={require('./img/black-silver-toaster.png')} alt=""></img> 
+    <p class="description">Black and silver extra-wide slotted toaster, 4 slices</p>
+    <p class="price">$39.99</p>
+    <p><button>Add to Order</button></p>
+  </div>
+  <div class="card">
+    <img src={require('./img/black-silver-toaster.png')} alt=""></img> 
+    <p class="description">Black and silver extra-wide slotted toaster, 4 slices</p>
+    <p class="price">$39.99</p>
+    <p><button>Add to Order</button></p>
+  </div>
+  <div class="card">
+    <img src={require('./img/black-silver-toaster.png')} alt=""></img> 
+    <p class="description">Black and silver extra-wide slotted toaster, 4 slices</p>
+    <p class="price">$39.99</p>
+    <p><button>Add to Order</button></p>
+  </div>
+  <div class="card">
+    <img src={require('./img/black-silver-toaster.png')} alt=""></img> 
+    <p class="description">Black and silver extra-wide slotted toaster, 4 slices</p>
+    <p class="price">$39.99</p>
+    <p><button>Add to Order</button></p>
+  </div>
+</div>
       </body>
     </div>
   );
 }
 
-export default Home;
+export default DepartmentFeed;
