@@ -141,3 +141,9 @@ body {
   top:50px;
   right:150px;
 }
+
+.img2 {
+  object-fit: cover;
+  width:230px;
+  height:230px;
+}
