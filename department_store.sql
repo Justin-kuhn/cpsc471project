@@ -137,6 +137,8 @@ CREATE TABLE Dept_Categories(
 	FOREIGN KEY (DName) REFERENCES Department(DName)
 );
 
+INSERT INTO Dept_Categories(DCategories, Dname)
+VALUES ("Cooking", "Appliances");
 
 DROP TABLE IF EXISTS ReturnRequest;
 CREATE TABLE ReturnRequest(
