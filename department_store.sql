@@ -42,6 +42,9 @@ CREATE TABLE Product(
 insert into Product(ItemID, DepartmentName, ItemDescription, Class, Category, Price, Quantity, InStock, BrandName, FileName)
 values 
 (1, "Appliances", "Black and silver extra-wide slotted toaster, 4 slices", "Toaster", "Cooking", 39.99, 1, true, "Earthquake", "black-silver-toaster.png");
+insert into Product(ItemID, DepartmentName, ItemDescription, Class, Category, Price, Quantity, InStock, BrandName, FileName)
+values 
+(2, "Appliances", "High temperature heavy duty industrial dishwasher", "Dishwasher", "Cleaning", 299.99, 1, true, "Miele", "high-temp-dishwasher.png");
 
 DROP TABLE IF EXISTS Product_SKU;
 CREATE TABLE Product_SKU(

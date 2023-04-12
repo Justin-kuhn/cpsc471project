@@ -10,10 +10,12 @@ function DepartmentFeed() {
   const { dname } = useParams();
   const [brands, setBrands] = useState([]);
   const [departments, setDepartments] = useState([]);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     brandData();
     departmentData();
+    productData();
   }, []);
 
   const brandData = async () => {
@@ -25,6 +27,12 @@ function DepartmentFeed() {
   const departmentData = async () => {
     fetchFromAPI('user/getDepartments').then((data) => {
       setDepartments(data);
+    }) 
+  };
+
+  const productData = async () => {
+    fetchFromAPI('user/'+dname+'/getProducts').then((data) => {
+      setProducts(data);
     }) 
   };
 
@@ -84,30 +92,14 @@ function DepartmentFeed() {
 </h1>
 </div>
 <div id="catalogue">
-  <div class="card">
-    <img src={require('./img/black-silver-toaster.png')} alt=""></img> 
-    <p class="description">Black and silver extra-wide slotted toaster, 4 slices</p>
-    <p class="price">$39.99</p>
+  {products.map((product) => (
+    <div class="card">
+    <img class="img2" src={require(`./img/${product.FileName}`)} alt=""></img> 
+    <p class="description">{product.ItemDescription}</p>
+    <p class="price">${product.Price}</p>
     <p><button>Add to Order</button></p>
   </div>
-  <div class="card">
-    <img src={require('./img/black-silver-toaster.png')} alt=""></img> 
-    <p class="description">Black and silver extra-wide slotted toaster, 4 slices</p>
-    <p class="price">$39.99</p>
-    <p><button>Add to Order</button></p>
-  </div>
-  <div class="card">
-    <img src={require('./img/black-silver-toaster.png')} alt=""></img> 
-    <p class="description">Black and silver extra-wide slotted toaster, 4 slices</p>
-    <p class="price">$39.99</p>
-    <p><button>Add to Order</button></p>
-  </div>
-  <div class="card">
-    <img src={require('./img/black-silver-toaster.png')} alt=""></img> 
-    <p class="description">Black and silver extra-wide slotted toaster, 4 slices</p>
-    <p class="price">$39.99</p>
-    <p><button>Add to Order</button></p>
-  </div>
+  ))}
 </div>
       </body>
     </div>

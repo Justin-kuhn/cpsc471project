@@ -7,6 +7,7 @@ const {
     loginUser,
     getBrands,
     getDepartments,
+    getDepartmentProducts,
   } = require("../functionality/userFunctionality.js");
 
 /* User routes */
@@ -25,6 +26,9 @@ router.get("/getBrands", getBrands);
 
 //Gets all departments from the database
 router.get("/getDepartments", getDepartments);
+
+//Gets all products from a certain department
+router.get("/:dname/getProducts", getDepartmentProducts);
 
 
 module.exports = router;

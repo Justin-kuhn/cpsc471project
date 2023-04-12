@@ -79,10 +79,28 @@ const getDepartments = async (req, res) => {
   }
 };
 
+//Gets all products from a certain department in the db
+const getDepartmentProducts = async (req, res) => {
+  const dname = req.params.dname;
+  try{
+    const products = await db.getProductsFromDepartment(dname);
+    console.log(products);
+    if(!products)
+    {
+      return res.status(404).json({ message: "No products belong to this department" });
+    }
+    res.status(200).json(products);
+  }
+  catch(error){
+    res.status(500).json({ message: error.message });
+  } 
+};
+
 module.exports = {
     registerUser,
     registerAdmin,
     loginUser,
     getBrands,
-    getDepartments
+    getDepartments,
+    getDepartmentProducts,
   };

@@ -151,6 +151,22 @@ const getDepartments = () => {
     });
 }
 
+/**
+ * 
+ * Fetch products that belong to a department
+ */
+const getProductsFromDepartment = (dname) => {
+    let SQLquery = 'select * from Product where DepartmentName = "' + dname + '"';
+    return new Promise((resolve, reject) => {
+        con.query(SQLquery, (err, result) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(JSON.parse(JSON.stringify(result)));
+        })
+    });
+}
+
 
 /**
  * 
@@ -171,4 +187,5 @@ module.exports = {
     registerAdminAccount,
     getBrands,
     getDepartments,
+    getProductsFromDepartment,
 };
