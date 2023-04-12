@@ -15,6 +15,13 @@ CREATE TABLE Department(
 	PRIMARY KEY (DName)
 );
 
+INSERT INTO Department(Dname, Description)
+VALUES
+("Gardening", "For all your gardening needs"),
+("Carpentry", "Find the right tool for the job"),
+("Appliances", "From dishwashers to toasters");
+
+
 DROP TABLE IF EXISTS Brand;
 CREATE TABLE Brand(
 	BrandName varchar(128) NOT NULL,
@@ -22,11 +29,17 @@ CREATE TABLE Brand(
 	PRIMARY KEY (BrandName)
 );
 
+INSERT INTO Brand(BrandName, Description) 
+VALUES 
+("Miele", "World's leading vaccuum producer since 1971"),
+("Craftsman", "Need a hand? Get crafty"),
+("Earthquake", "Groundbreaking power equipment");
+
 DROP TABLE IF EXISTS Product;
 CREATE TABLE Product(
 	ItemID int NOT NULL,
 	DepartmentName varchar(128),
-	ItemDescription varchar(255),
+	ItemDescription varchar(1024),
 	Class varchar(128),
 	Category varchar(128),
 	Price decimal(10, 2),
@@ -39,12 +52,15 @@ CREATE TABLE Product(
 	FOREIGN KEY (DepartmentName) REFERENCES Department(DName)
 );
 
-insert into Product(ItemID, DepartmentName, ItemDescription, Class, Category, Price, Quantity, InStock, BrandName, FileName)
-values 
-(1, "Appliances", "Black and silver extra-wide slotted toaster, 4 slices", "Toaster", "Cooking", 39.99, 1, true, "Earthquake", "black-silver-toaster.png");
-insert into Product(ItemID, DepartmentName, ItemDescription, Class, Category, Price, Quantity, InStock, BrandName, FileName)
-values 
-(2, "Appliances", "High temperature heavy duty industrial dishwasher", "Dishwasher", "Cleaning", 299.99, 1, true, "Miele", "high-temp-dishwasher.png");
+INSERT INTO Product(ItemID, DepartmentName, ItemDescription, Class, Category, Price, Quantity, InStock, BrandName, FileName)
+VALUES
+(1, "Appliances", "Black and silver extra-wide slotted toaster, 4 slices", "Toaster", "Cooking", 39.99, 1, true, "Earthquake", "black-silver-toaster.png"),
+(2, "Appliances", "High temperature heavy duty industrial dishwasher", "Dishwasher", "Cleaning", 299.99, 1, true, "Miele", "high-temp-dishwasher.png"),
+(3, "Appliances", "36-inch stainless steel French door refrigerator", "Refrigerator", "Storage", 599.99, 1, true, "Craftsman", "french-door-refrigerator.png"), 
+(4, "Carpentry", "Ideal for striking chisels or punches, peining rivets, and shaping unhardened metals","Hammer", "Woodwork Tools", 44.99, 1, true, "Craftsman", "fiberglass-claw-hammer.png"),
+(5, "Carpentry", "Compact 6.37 in. size for drilling in hard to reach spaces", "Cordless Drill", "Woodwork Tools", 219.99, 2, true, "Craftsman", "cordless-drill.jpg"),
+(6, "Gardening", "Features a brushless front mounted motor for higher efficiency and prolonged life", "Grass Trimmer", "Gardening Tools", 399.99, 4, true, "Earthquake", "grass-trimmer.jpg"),
+(7, "Gardening", "An ideal choice if you need a digging tool that is larger than a trowel and smaller than a full size spade", "Spade", "Gardening Tools", 59.99, 2, true, "Miele" , "spade-shovel.jpg");
 
 DROP TABLE IF EXISTS Product_SKU;
 CREATE TABLE Product_SKU(
@@ -121,7 +137,6 @@ CREATE TABLE Dept_Categories(
 	FOREIGN KEY (DName) REFERENCES Department(DName)
 );
 
-insert into Dept_Categories(DCategories, Dname) values ("Cooking", "Appliances");
 
 DROP TABLE IF EXISTS ReturnRequest;
 CREATE TABLE ReturnRequest(
