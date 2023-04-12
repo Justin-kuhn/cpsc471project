@@ -15,12 +15,25 @@ CREATE TABLE Department(
 	PRIMARY KEY (DName)
 );
 
+INSERT INTO Department(Dname, Description)
+VALUES
+("Gardening", "For all your gardening needs"),
+("Carpentry", "Find the right tool for the job"),
+("Appliances", "From dishwashers to toasters");
+
+
 DROP TABLE IF EXISTS Brand;
 CREATE TABLE Brand(
 	BrandName varchar(128) NOT NULL,
 	Description varchar(255),
 	PRIMARY KEY (BrandName)
 );
+
+INSERT INTO Brand(BrandName, Description) 
+VALUES 
+("Miele", "World's leading vaccuum producer since 1971"),
+("Craftsman", "Need a hand? Get crafty"),
+("Earthquake", "Groundbreaking power equipment");
 
 DROP TABLE IF EXISTS Product;
 CREATE TABLE Product(
@@ -39,12 +52,11 @@ CREATE TABLE Product(
 	FOREIGN KEY (DepartmentName) REFERENCES Department(DName)
 );
 
-insert into Product(ItemID, DepartmentName, ItemDescription, Class, Category, Price, Quantity, InStock, BrandName, FileName)
-values 
-(1, "Appliances", "Black and silver extra-wide slotted toaster, 4 slices", "Toaster", "Cooking", 39.99, 1, true, "Earthquake", "black-silver-toaster.png");
-insert into Product(ItemID, DepartmentName, ItemDescription, Class, Category, Price, Quantity, InStock, BrandName, FileName)
-values 
-(2, "Appliances", "High temperature heavy duty industrial dishwasher", "Dishwasher", "Cleaning", 299.99, 1, true, "Miele", "high-temp-dishwasher.png");
+INSERT INTO Product(ItemID, DepartmentName, ItemDescription, Class, Category, Price, Quantity, InStock, BrandName, FileName)
+VALUES
+(1, "Appliances", "Black and silver extra-wide slotted toaster, 4 slices", "Toaster", "Cooking", 39.99, 1, true, "Earthquake", "black-silver-toaster.png"),
+(2, "Appliances", "High temperature heavy duty industrial dishwasher", "Dishwasher", "Cleaning", 299.99, 1, true, "Miele", "high-temp-dishwasher.png"),
+ (3, "Appliances", "36-inch stainless steel French door refrigerator", "Refrigerator", "Storage", 599.99, 1, true, "Craftsman", "french-door-refrigerator.png");
 
 DROP TABLE IF EXISTS Product_SKU;
 CREATE TABLE Product_SKU(
@@ -121,7 +133,8 @@ CREATE TABLE Dept_Categories(
 	FOREIGN KEY (DName) REFERENCES Department(DName)
 );
 
-insert into Dept_Categories(DCategories, Dname) values ("Cooking", "Appliances");
+INSERT INTO Dept_Categories(DCategories, Dname)
+VALUES ("Cooking", "Appliances");
 
 DROP TABLE IF EXISTS ReturnRequest;
 CREATE TABLE ReturnRequest(
