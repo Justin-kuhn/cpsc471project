@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import './styles/DepartmentFeed.css';
+import './styles/CategoryFeed.css';
 
 import {
   fetchFromAPI,
 } from "../utils/fetchFromApi";
 
 function DepartmentFeed() { 
-  const { dname } = useParams();
+  const { dname, cname } = useParams();
+  console.log(dname, cname);
   const [brands, setBrands] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  var cart = [];
 
   useEffect(() => {
     brandData();
@@ -34,7 +34,7 @@ function DepartmentFeed() {
   };
 
   const productData = async () => {
-    fetchFromAPI('user/department/'+dname+'/getProducts').then((data) => {
+    fetchFromAPI('user/department/'+dname+'/'+cname+'/getProducts').then((data) => {
       setProducts(data);
     }) 
   };
@@ -107,8 +107,8 @@ function DepartmentFeed() {
 }
 <div class="department-text">
 <h1>
-  {`Department: ${dname}`}
-  <div class="dropdown">
+  {`Department: ${dname}`}<br></br><div class="cat-text">{`Category: ${cname}`}</div>
+  <div class="dropdown2">
   <button class="dropbtn">Select Category ▼</button>
   <div class="dropdown-content">
     { categories.map((category) => (
@@ -120,7 +120,7 @@ function DepartmentFeed() {
 </div>
 </h1>
 </div>
-<div id="catalogue">
+<div id="catalogue2">
   {products.map((product) => (
     <div class="card">
     <img class="img2" src={require(`./img/${product.FileName}`)} alt=""></img> 

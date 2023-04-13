@@ -167,6 +167,53 @@ const getProductsFromDepartment = (dname) => {
     });
 }
 
+/**
+ * 
+ * Fetch products that belong to a brand
+ */
+const getProductsFromBrand = (brandName) => {
+    let SQLquery = 'select * from Product where BrandName = "' + brandName + '"';
+    return new Promise((resolve, reject) => {
+        con.query(SQLquery, (err, result) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(JSON.parse(JSON.stringify(result)));
+        })
+    });
+}
+
+/**
+ * 
+ * Fetch categories that belong to a department
+ */
+const getCategoriesFromDepartment = (dname) => {
+    let SQLquery = 'select * from dept_categories where Dname = "' + dname + '"';
+    return new Promise((resolve, reject) => {
+        con.query(SQLquery, (err, result) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(JSON.parse(JSON.stringify(result)));
+        })
+    });
+}
+
+/**
+ * 
+ * Fetch products that belong to a category in a department
+ */
+const getProductsFromCategory = (dname, cname) => {
+    let SQLquery = 'select * from Product where DepartmentName = "' + dname + '" and Category = "' + cname + '"';
+    return new Promise((resolve, reject) => {
+        con.query(SQLquery, (err, result) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(JSON.parse(JSON.stringify(result)));
+        })
+    });
+}
 
 /**
  * 
@@ -188,4 +235,7 @@ module.exports = {
     getBrands,
     getDepartments,
     getProductsFromDepartment,
+    getProductsFromBrand,
+    getCategoriesFromDepartment,
+    getProductsFromCategory,
 };

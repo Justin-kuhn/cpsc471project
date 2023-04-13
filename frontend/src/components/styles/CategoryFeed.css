@@ -133,11 +133,11 @@ body {
   opacity: 0.7;
 }
 
-#catalogue {
+#catalogue2 {
   position:relative;
   display:grid;
   grid-template: 500px / auto auto auto;
-  top:50px;
+  bottom:20px;
   right:0px;
 }
 
@@ -161,10 +161,10 @@ body {
   border: none;
 }
 
-.dropdown {
+.dropdown2 {
   position: relative;
-  left:25px;
-  bottom:5px;
+  left:525px;
+  bottom:60px;
   display: inline-block;
 }
 
@@ -188,6 +188,12 @@ body {
 
 .dropdown-content a:hover {background-color: #ddd;}
 
-.dropdown:hover .dropdown-content {display: block;}
+.dropdown2:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: red;}
+.dropdown2:hover .dropbtn {background-color: red;}
+
+.cat-text {
+  position:relative;
+  left:94px;
+  top:10px;
+}

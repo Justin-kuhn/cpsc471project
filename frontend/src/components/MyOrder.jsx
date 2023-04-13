@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import './styles/DepartmentFeed.css';
+import './styles/MyOrder.css';
 
 import {
   fetchFromAPI,
 } from "../utils/fetchFromApi";
 
-function DepartmentFeed() { 
-  const { dname } = useParams();
+function MyOrder() { 
+  const { brandName } = useParams();
   const [brands, setBrands] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  var cart = [];
+  var productsInOrder = [];
+  parseCart(); 
 
   useEffect(() => {
     brandData();
     departmentData();
     productData();
-    categoryData();
   }, []);
 
   const brandData = async () => {
@@ -34,14 +33,8 @@ function DepartmentFeed() {
   };
 
   const productData = async () => {
-    fetchFromAPI('user/department/'+dname+'/getProducts').then((data) => {
+    fetchFromAPI('user/brand/'+ brandName +'/getProducts').then((data) => {
       setProducts(data);
-    }) 
-  };
-
-  const categoryData = async () => {
-    fetchFromAPI('user/department/'+dname+'/getCategories').then((data) => {
-      setCategories(data);
     }) 
   };
 
@@ -50,22 +43,24 @@ function DepartmentFeed() {
     sessionStorage.clear();
   }
 
-  const addToCart = (id, description, price, brandname, filename) => {
-    const cart = [id, description, price, brandname, filename];
-    if(sessionStorage.getItem("cart") == null){
-      sessionStorage.setItem("cart", cart);
+  function parseCart(){
+    if(sessionStorage.getItem("cart") == null) { return; }
+    var wholeStringAsArray = sessionStorage.getItem("cart").split('\n');
+    for(var i = 0; i < wholeStringAsArray.length; i++){
+      var productAsArray = wholeStringAsArray[i].split(',');
+      var json = { id: productAsArray[0], description: productAsArray[1], price: productAsArray[2],
+      brandname: productAsArray[3], filename:productAsArray[4]};
+      productsInOrder.push(json);
     }
-    else{
-      sessionStorage.setItem("cart", sessionStorage.getItem("cart") + '\n' + cart);
-    }
+    console.log(productsInOrder);
   }
 
   return (
-    //HTML for the Department feed
-    <div class="departmentFeed">
+    //HTML for the Brand feed
+    <div class="myOrder">
       <head>
-      <link rel="stylesheet" href="./styles/DepartmentFeed.css"></link>
-        <title>Home Page</title>
+      <link rel="stylesheet" href="./styles/MyOrder.css"></link>
+        <title>Order page</title>
       </head>
       <body>
       <div class="navbar">
@@ -105,28 +100,18 @@ function DepartmentFeed() {
   Not logged in
 </p>
 }
-<div class="department-text">
+<div class="myorder-text">
 <h1>
-  {`Department: ${dname}`}
-  <div class="dropdown">
-  <button class="dropbtn">Select Category ▼</button>
-  <div class="dropdown-content">
-    { categories.map((category) => (
-      <a href={`http://localhost:3000/department/${dname}/${category.DCategories}`}>
-        {category.DCategories}</a>
-    ))}
-    <a href={`http://localhost:3000/department/${dname}`}>All</a>
-  </div>
-</div>
+  {`My Order:`}
 </h1>
 </div>
 <div id="catalogue">
-  {products.map((product) => (
+  {productsInOrder.map((product) => (
     <div class="card">
-    <img class="img2" src={require(`./img/${product.FileName}`)} alt=""></img> 
-    <p class="description">{product.ItemDescription}</p>
-    <p class="price">${product.Price}</p>
-    <p><button onClick={() => {addToCart(product.ItemID, product.ItemDescription, product.Price, product.BrandName, product.FileName);} }>Add to Order</button></p>
+    <img class="img2" src={require(`./img/${product.filename}`)} alt=""></img> 
+    <p class="description">{product.description}</p>
+    <p class="price">${product.price}</p>
+    <p><button>Add to Order</button></p>
   </div>
   ))}
 </div>
@@ -135,4 +120,4 @@ function DepartmentFeed() {
   );
 }
 
-export default DepartmentFeed;
+export default MyOrder;

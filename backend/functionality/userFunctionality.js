@@ -96,6 +96,59 @@ const getDepartmentProducts = async (req, res) => {
   } 
 };
 
+//Gets all products from a certain brand in the db
+const getBrandProducts = async (req, res) => {
+  const brandName = req.params.brandName;
+  console.log(brandName);
+  try{
+    const products = await db.getProductsFromBrand(brandName);
+    console.log(products);
+    if(!products)
+    {
+      return res.status(404).json({ message: "No products belong to this brand" });
+    }
+    res.status(200).json(products);
+  }
+  catch(error){
+    res.status(500).json({ message: error.message });
+  } 
+};
+
+//Gets all products from a certain department in the db
+const getDepartmentCategories = async (req, res) => {
+  const dname = req.params.dname;
+  try{
+    const categories = await db.getCategoriesFromDepartment(dname);
+    console.log(categories);
+    if(!categories)
+    {
+      return res.status(404).json({ message: "This department has no categories" });
+    }
+    res.status(200).json(categories);
+  }
+  catch(error){
+    res.status(500).json({ message: error.message });
+  } 
+};
+
+//Gets all products from a certain department and category in the db
+const getCategoryProducts = async (req, res) => {
+  const dname = req.params.dname;
+  const cname = req.params.cname;
+  try{
+    const products = await db.getProductsFromCategory(dname, cname);
+    console.log(products);
+    if(!products)
+    {
+      return res.status(404).json({ message: "No products belong to this category in this department" });
+    }
+    res.status(200).json(products);
+  }
+  catch(error){
+    res.status(500).json({ message: error.message });
+  } 
+};
+
 module.exports = {
     registerUser,
     registerAdmin,
@@ -103,4 +156,7 @@ module.exports = {
     getBrands,
     getDepartments,
     getDepartmentProducts,
+    getBrandProducts,
+    getDepartmentCategories,
+    getCategoryProducts,
   };

@@ -8,6 +8,9 @@ const {
     getBrands,
     getDepartments,
     getDepartmentProducts,
+    getBrandProducts,
+    getDepartmentCategories,
+    getCategoryProducts,
   } = require("../functionality/userFunctionality.js");
 
 /* User routes */
@@ -28,7 +31,15 @@ router.get("/getBrands", getBrands);
 router.get("/getDepartments", getDepartments);
 
 //Gets all products from a certain department
-router.get("/:dname/getProducts", getDepartmentProducts);
+router.get("/department/:dname/getProducts", getDepartmentProducts);
 
+//Gets all products from a certain department and category
+router.get("/department/:dname/:cname/getProducts", getCategoryProducts);
+
+//Gets all categories in a certain department
+router.get("/department/:dname/getCategories", getDepartmentCategories);
+
+//Gets all products from a certain brand
+router.get("/brand/:brandName/getProducts", getBrandProducts);
 
 module.exports = router;

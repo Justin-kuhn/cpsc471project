@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
-import './styles/DepartmentFeed.css';
+import './styles/BrandFeed.css';
 
 import {
   fetchFromAPI,
 } from "../utils/fetchFromApi";
 
-function DepartmentFeed() { 
-  const { dname } = useParams();
+function BrandFeed() { 
+  const { brandName } = useParams();
   const [brands, setBrands] = useState([]);
   const [departments, setDepartments] = useState([]);
   const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
-  var cart = [];
 
   useEffect(() => {
     brandData();
     departmentData();
     productData();
-    categoryData();
   }, []);
 
   const brandData = async () => {
@@ -34,14 +31,8 @@ function DepartmentFeed() {
   };
 
   const productData = async () => {
-    fetchFromAPI('user/department/'+dname+'/getProducts').then((data) => {
+    fetchFromAPI('user/brand/'+ brandName +'/getProducts').then((data) => {
       setProducts(data);
-    }) 
-  };
-
-  const categoryData = async () => {
-    fetchFromAPI('user/department/'+dname+'/getCategories').then((data) => {
-      setCategories(data);
     }) 
   };
 
@@ -61,10 +52,10 @@ function DepartmentFeed() {
   }
 
   return (
-    //HTML for the Department feed
-    <div class="departmentFeed">
+    //HTML for the Brand feed
+    <div class="brandFeed">
       <head>
-      <link rel="stylesheet" href="./styles/DepartmentFeed.css"></link>
+      <link rel="stylesheet" href="./styles/BrandFeed.css"></link>
         <title>Home Page</title>
       </head>
       <body>
@@ -105,19 +96,9 @@ function DepartmentFeed() {
   Not logged in
 </p>
 }
-<div class="department-text">
+<div class="brand-text">
 <h1>
-  {`Department: ${dname}`}
-  <div class="dropdown">
-  <button class="dropbtn">Select Category ▼</button>
-  <div class="dropdown-content">
-    { categories.map((category) => (
-      <a href={`http://localhost:3000/department/${dname}/${category.DCategories}`}>
-        {category.DCategories}</a>
-    ))}
-    <a href={`http://localhost:3000/department/${dname}`}>All</a>
-  </div>
-</div>
+  {`Brand: ${brandName}`}
 </h1>
 </div>
 <div id="catalogue">
@@ -135,4 +116,4 @@ function DepartmentFeed() {
   );
 }
 
-export default DepartmentFeed;
+export default BrandFeed;
