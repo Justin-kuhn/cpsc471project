@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
 import './styles/MyOrder.css';
 
 import {
@@ -7,17 +6,14 @@ import {
 } from "../utils/fetchFromApi";
 
 function MyOrder() { 
-  const { brandName } = useParams();
   const [brands, setBrands] = useState([]);
   const [departments, setDepartments] = useState([]);
-  const [products, setProducts] = useState([]);
   var productsInOrder = [];
   parseCart(); 
 
   useEffect(() => {
     brandData();
     departmentData();
-    productData();
   }, []);
 
   const brandData = async () => {
@@ -29,12 +25,6 @@ function MyOrder() {
   const departmentData = async () => {
     fetchFromAPI('user/getDepartments').then((data) => {
       setDepartments(data);
-    }) 
-  };
-
-  const productData = async () => {
-    fetchFromAPI('user/brand/'+ brandName +'/getProducts').then((data) => {
-      setProducts(data);
     }) 
   };
 
