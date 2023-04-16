@@ -36,6 +36,27 @@ const logIn = (username, password, email) => {
                 return reject(err);
             }
             if(result.length){
+                return resolve(JSON.parse(JSON.stringify(result)));
+            }
+            return resolve(false);
+        })
+    });
+}
+
+/**
+ * @username - The username of a registered user
+ * @password - Password associated with the account
+ * 
+ * Customer Log-in
+ */
+const loginAdmin = (username, password, email) => {
+    let SQLquery = 'select * from adminaccount where username = "'+username+'" and password = "' +password+'" and email = "' +email+'"';
+    return new Promise((resolve, reject) => {
+        con.query(SQLquery, (err, result) => {
+            if(err){
+                return reject(err);
+            }
+            if(result.length){
                 return resolve(true);
             }
             return resolve(false);
@@ -77,12 +98,12 @@ function registerCustomerAccount(username, password, email, first_name, last_nam
 
         con.query(CustomerInfo, function(err, result){
             if(err){
-                //If err, it means that email is already registered to another customer, cannot make account
+                return;
             };
 
             con.query(accountInfo, function(err, result){
                 if(err) {
-                    throw err; //If err, it means that username is already used, cannot make account
+                    return;
                 };
                 
                 //window.location.href = "./webpage_name.html"; //After successful registration, direct to the desired webpage
@@ -269,6 +290,22 @@ const getOrderID = () => {
 
 /**
  * 
+ * Fetch all users in the db
+ */
+const getUsers= () => {
+    let SQLquery = 'select * from account';
+    return new Promise((resolve, reject) => {
+        con.query(SQLquery, (err, result) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(JSON.parse(JSON.stringify(result)));
+        })
+    });
+}
+
+/**
+ * 
  * @param {*} adminEmail - Admin administering ban
  * @param {*} customerUsername - Username of customer account receiving ban
  * @param {*} action - disciplinary action taken; for now ban is the only action
@@ -281,7 +318,7 @@ function moderateAccount(adminEmail, customerUsername, action, reason, date){
 
 module.exports = {
     logIn,
-    logInAdmin,
+    loginAdmin,
     registerCustomerAccount,
     registerAdminAccount,
     getBrands,
@@ -293,4 +330,5 @@ module.exports = {
     createOrder,
     addToOrder,
     getOrderID,
+    getUsers,
 };

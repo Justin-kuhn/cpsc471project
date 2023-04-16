@@ -40,12 +40,28 @@ const loginUser = async (req, res) => {
     {
       return res.status(401).json({ message: "The username or password is incorrect" });
     }
-    res.status(200).json({ message: "Login successful" });
+    res.status(200).json(valid);
   }
   catch(error){
     res.status(500).json({ message: error.message });
   }
 };
+
+  //Logins an admin
+  const loginAdmin = async (req, res) => {
+    try{
+      const { username, password, email } = req.body;
+      const valid = await db.loginAdmin(username, password, email);
+      if(!valid)
+      {
+        return res.status(401).json({ message: "The username or password is incorrect" });
+      }
+      res.status(200).json({ message: "Login successful" });
+    }
+    catch(error){
+      res.status(500).json({ message: error.message });
+    }
+  };
 
 //Gets all brand names in the db
 const getBrands = async (req, res) => {
@@ -182,10 +198,27 @@ const getCategoryProducts = async (req, res) => {
     }
   };
 
+  //Gets all users in the db
+const getUsers = async (req, res) => {
+  try{
+    const users = await db.getUsers();
+    console.log(users);
+    if(!users)
+    {
+      return res.status(404).json({ message: "No users are in the db" });
+    }
+    res.status(200).json(users);
+  }
+  catch(error){
+    res.status(500).json({ message: error.message });
+  } 
+};
+
 module.exports = {
     registerUser,
     registerAdmin,
     loginUser,
+    loginAdmin,
     getBrands,
     getDepartments,
     getDepartmentProducts,
@@ -194,4 +227,5 @@ module.exports = {
     getCategoryProducts,
     createOrder,
     addToOrder,
+    getUsers,
   };

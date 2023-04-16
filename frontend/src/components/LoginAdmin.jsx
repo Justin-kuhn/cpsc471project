@@ -1,11 +1,11 @@
 import React from 'react';
-import './styles/Login.css';
+import './styles/LoginAdmin.css';
 
 import {
-  LoginAPI,
+  AdminLogin
 } from "../utils/fetchFromApi";
 
-function Login() {
+function LoginAdmin() {
 
   // Function that executes when the submit button is pressed
   const handleSubmit = async (event) => {
@@ -14,11 +14,8 @@ function Login() {
     let email = document.getElementById('email').value;
     event.preventDefault();
     try {
-      const data = await LoginAPI(username,password,email);
-      if(data[0].IsBanned){
-        return alert('This account has been banned and cannot login');
-      }
-      window.location.href = "./home";
+      const data = await AdminLogin(username,password,email);
+      window.location.href = "./adminPanel";
       sessionStorage.setItem("loggedInUser", username);
       sessionStorage.setItem("loggedInEmail", email);
     } catch (error) {
@@ -34,8 +31,8 @@ function Login() {
         <title>Login Page</title>
       </head>
       <body>
-        <div class="login-header">
-        <h1>Login</h1>
+        <div class="login-header2">
+        <h1>Admin Login</h1>
         </div>
         <form onSubmit={handleSubmit}>
           <div class="username-field">
@@ -51,16 +48,10 @@ function Login() {
           <input type="text" id="email" name="email" required></input><br></br>
         </div>
         <input type="submit" id="login-button" value="Login"></input>
-        <p class="help-text">
-        Don't have an account?<br></br>
-        <a href="./register" class="create-link">
-          Create one now
-        </a>
-      </p>
         </form>
       </body>
     </div>
   );
 }
 
-export default Login;
+export default LoginAdmin;

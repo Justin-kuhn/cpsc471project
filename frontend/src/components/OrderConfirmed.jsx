@@ -57,9 +57,6 @@ function Checkout() {
 
    // Function that executes when the submit button is pressed
    const placeOrder = async (event) => {
-    if(sessionStorage.getItem("loggedInUser") == null){
-      return alert('You must be logged in to place an order');
-    }
     let email = sessionStorage.getItem("loggedInEmail");
     let orderDate = new Date();
     let shipDate = new Date(orderDate);
@@ -77,7 +74,7 @@ function Checkout() {
       for(var i = 0; i < productsInOrder.length; i++){
         const data2 = await AddToOrder(data.insertId, productsInOrder[i].id, productsInOrder[i].sku_num);
       }
-      //window.location.href = "http://localhost:3000/myOrder/checkout/orderConfirmed";
+      window.location.href = "http://localhost:3000/myOrder/checkout/orderConfirmed";
     } catch (error) {
       console.error(error);
     }
