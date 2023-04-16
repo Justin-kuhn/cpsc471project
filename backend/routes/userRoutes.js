@@ -13,6 +13,8 @@ const {
     getCategoryProducts,
     createOrder,
     addToOrder,
+    loginAdmin,
+    getUsers
   } = require("../functionality/userFunctionality.js");
 
 /* User routes */
@@ -23,8 +25,11 @@ router.post("/register", registerUser);
 //Register a new admin
 router.post("/registerAdmin", registerAdmin);
 
-//Register a new user
+//Login a user
 router.post("/login", loginUser);
+
+//Login an admin
+router.post("/loginAdmin", loginAdmin);
 
 //Create a new order
 router.post("/createOrder", createOrder);
@@ -49,5 +54,8 @@ router.get("/department/:dname/getCategories", getDepartmentCategories);
 
 //Gets all products from a certain brand
 router.get("/brand/:brandName/getProducts", getBrandProducts);
+
+//Gets all users in the db
+router.get("/getUsers", getUsers);
 
 module.exports = router;

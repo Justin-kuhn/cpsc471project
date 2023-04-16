@@ -26,6 +26,24 @@ export const LoginAPI = async (Username, Password, Email) => {
   return response.data;
 };
 
+// Endpoint to login as an admin
+export const AdminLogin = async (Username, Password, Email) => {
+  const response = await axios
+    .post(`${BASE_URL}/user/loginAdmin`, {
+      username: Username,
+      password: Password,
+      email: Email,
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.error(error);
+        alert("Login failed. Please try again.");
+      }
+    });
+    console.log('response data: ' + response.data);
+  return response.data;
+};
+
 // Endpoint to register
 export const RegisterAPI = async (Username, Password, Email, Fname, Lname, Age, Gender, Phone) => {
   const response = await axios
