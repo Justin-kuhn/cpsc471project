@@ -98,12 +98,12 @@ function registerCustomerAccount(username, password, email, first_name, last_nam
 
         con.query(CustomerInfo, function(err, result){
             if(err){
-                //If err, it means that email is already registered to another customer, cannot make account
+                return;
             };
 
             con.query(accountInfo, function(err, result){
                 if(err) {
-                    throw err; //If err, it means that username is already used, cannot make account
+                    return;
                 };
                 
                 //window.location.href = "./webpage_name.html"; //After successful registration, direct to the desired webpage
