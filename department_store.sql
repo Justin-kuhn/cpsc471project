@@ -141,7 +141,13 @@ CREATE TABLE Dept_Categories(
 );
 
 INSERT INTO Dept_Categories(DCategories, Dname)
-VALUES ("Cooking", "Appliances");
+VALUES 
+("Rough", "Carpentry"),
+("Roofing", "Carpentry"),
+("Framework", "Carpentry"),
+("Cooking", "Appliances"),
+("Cleaning", "Appliances"),
+("Storage", "Appliances");
 
 DROP TABLE IF EXISTS ReturnRequest;
 CREATE TABLE ReturnRequest(
