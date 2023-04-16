@@ -26,7 +26,7 @@ export const LoginAPI = async (Username, Password, Email) => {
   return response.data;
 };
 
-// Endpoint to login
+// Endpoint to register
 export const RegisterAPI = async (Username, Password, Email, Fname, Lname, Age, Gender, Phone) => {
   const response = await axios
     .post(`${BASE_URL}/user/register`, {
@@ -48,7 +48,7 @@ export const RegisterAPI = async (Username, Password, Email, Fname, Lname, Age, 
   return response.data;
 };
 
-// Endpoint to login
+// Endpoint to register admin
 export const RegisterAdminAPI = async (Username, Password, Email, Fname, Lname, Age, Gender, Phone, Position) => {
   const response = await axios
     .post(`${BASE_URL}/user/registerAdmin`, {
@@ -68,5 +68,50 @@ export const RegisterAdminAPI = async (Username, Password, Email, Fname, Lname, 
         alert("Admin Registration failed. Please try again.");
       }
     });
+  return response.data;
+};
+
+// Endpoint to create order entry
+export const OrderAPI = async (Email, OrderDate, ShipDate, ItemSubtotal, ShipCost, Tax, EstDelivery, Street, City, Province, Postal, IsCancelled) => {
+  const response = await axios
+    .post(`${BASE_URL}/user/createOrder`, {
+      email: Email,
+      orderDate: OrderDate,
+      shipDate: ShipDate,
+      itemsCost: ItemSubtotal,
+      shipCost: ShipCost,
+      tax: Tax,
+      estDeliveryDate: EstDelivery,
+      street: Street,
+      city: City,
+      province: Province,
+      postal: Postal,
+      isCancelled: IsCancelled
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.error(error);
+        alert("Order creation failed. Please try again.");
+      }
+    });
+    console.log('response data: ' + response.data);
+  return response.data;
+};
+
+// Endpoint to add to order_contains 
+export const AddToOrder = async (OrderID, ItemID, ItemSKU) => {
+  const response = await axios
+    .post(`${BASE_URL}/user/addToOrder`, {
+      orderID: OrderID,
+      itemID: ItemID,
+      itemSKU: ItemSKU
+    })
+    .catch((error) => {
+      if (error.response) {
+        console.error(error);
+        alert("Could not add to order. Please try again.");
+      }
+    });
+    console.log('response data: ' + response.data);
   return response.data;
 };

@@ -8,6 +8,7 @@ import DepartmentFeed from "../src/components/DepartmentFeed.jsx";
 import BrandFeed from "../src/components/BrandFeed.jsx";
 import CategoryFeed from "../src/components/CategoryFeed.jsx";
 import MyOrder from "../src/components/MyOrder.jsx";
+import Checkout from "../src/components/Checkout.jsx";
 
 const App = () => (
 
@@ -22,6 +23,7 @@ const App = () => (
       <Route path="/department/:dname" element={<DepartmentFeed />} /> 
       <Route path="/department/:dname/:cname" element={<CategoryFeed />} /> 
       <Route path="/brand/:brandName" element={<BrandFeed />} /> 
+      <Route path="/myOrder/checkout" element={<Checkout />} />
     </Routes>
   </BrowserRouter>
 );

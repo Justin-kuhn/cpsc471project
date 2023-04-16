@@ -33,6 +33,10 @@ function MyOrder() {
     sessionStorage.clear();
   }
 
+  const proceed = () => {
+    window.location.href = "http://localhost:3000/myOrder/checkout";
+  }
+
   function parseCart(){
     if(sessionStorage.getItem("cart") == null) { return; }
     var wholeStringAsArray = sessionStorage.getItem("cart").split('\n');
@@ -93,6 +97,7 @@ function MyOrder() {
 <div class="myorder-text">
 <h1>
   {`My Order:`}
+  <button class="checkout-button" onClick={proceed}>Proceed To Checkout ▶</button>
 </h1>
 </div>
 <div id="catalogue">

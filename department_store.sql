@@ -60,7 +60,10 @@ VALUES
 (4, "Carpentry", "Ideal for striking chisels or punches, peining rivets, and shaping unhardened metals","Hammer", "Woodwork Tools", 44.99, 1, true, "Craftsman", "fiberglass-claw-hammer.png"),
 (5, "Carpentry", "Compact 6.37 in. size for drilling in hard to reach spaces", "Cordless Drill", "Woodwork Tools", 219.99, 2, true, "Craftsman", "cordless-drill.jpg"),
 (6, "Gardening", "Features a brushless front mounted motor for higher efficiency and prolonged life", "Grass Trimmer", "Gardening Tools", 399.99, 4, true, "Earthquake", "grass-trimmer.jpg"),
-(7, "Gardening", "An ideal choice if you need a digging tool that is larger than a trowel and smaller than a full size spade", "Spade", "Gardening Tools", 59.99, 2, true, "Miele" , "spade-shovel.jpg");
+(7, "Gardening", "An ideal choice if you need a digging tool that is larger than a trowel and smaller than a full size spade", "Spade", "Gardening Tools", 59.99, 2, true, "Miele" , "spade-shovel.jpg"),
+(8, "Carpentry", "16-oz. rubber grip reinforced curved claw hammer", "Hammer", "Rough", 18.50, 1, true, "Craftsman", "claw-hammer.png"),
+(9, "Carpentry", "15-degree 1-3/4-inch coil roofing nail gun", "Nail gun", "Roofing", 42.25, 1, true, "Miele", "roofing-nailgun.png"),
+(10, "Carpentry", "7-inch stainless steel carpentry rafter square", "Rafter Square", "Framework", 21.65, 1, true, "Earthquake", "rafter-square.png");
 
 DROP TABLE IF EXISTS Product_SKU;
 CREATE TABLE Product_SKU(

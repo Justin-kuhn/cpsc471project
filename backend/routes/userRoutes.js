@@ -11,6 +11,8 @@ const {
     getBrandProducts,
     getDepartmentCategories,
     getCategoryProducts,
+    createOrder,
+    addToOrder,
   } = require("../functionality/userFunctionality.js");
 
 /* User routes */
@@ -23,6 +25,12 @@ router.post("/registerAdmin", registerAdmin);
 
 //Register a new user
 router.post("/login", loginUser);
+
+//Create a new order
+router.post("/createOrder", createOrder);
+
+//Add to an existing order
+router.post("/addToOrder", addToOrder);
 
 //Gets all brands from the database
 router.get("/getBrands", getBrands);

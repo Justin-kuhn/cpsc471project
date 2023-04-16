@@ -156,7 +156,7 @@ const getDepartments = () => {
  * Fetch products that belong to a department
  */
 const getProductsFromDepartment = (dname) => {
-    let SQLquery = 'select * from Product where DepartmentName = "' + dname + '"';
+    let SQLquery = 'select * from (Product_SKU join Product on Product_SKU.ItemID = Product.ItemID) where DepartmentName = "' + dname + '"';
     return new Promise((resolve, reject) => {
         con.query(SQLquery, (err, result) => {
             if(err){
@@ -172,7 +172,7 @@ const getProductsFromDepartment = (dname) => {
  * Fetch products that belong to a brand
  */
 const getProductsFromBrand = (brandName) => {
-    let SQLquery = 'select * from Product where BrandName = "' + brandName + '"';
+    let SQLquery = 'select * from (Product_SKU join Product on Product_SKU.ItemID = Product.ItemID) where BrandName = "' + brandName + '"';
     return new Promise((resolve, reject) => {
         con.query(SQLquery, (err, result) => {
             if(err){
@@ -204,7 +204,59 @@ const getCategoriesFromDepartment = (dname) => {
  * Fetch products that belong to a category in a department
  */
 const getProductsFromCategory = (dname, cname) => {
-    let SQLquery = 'select * from Product where DepartmentName = "' + dname + '" and Category = "' + cname + '"';
+    let SQLquery = 'select * from (Product_SKU join Product on Product_SKU.ItemID = Product.ItemID) where DepartmentName = "' + dname + '" and Category = "' + cname + '"';
+    return new Promise((resolve, reject) => {
+        con.query(SQLquery, (err, result) => {
+            if(err){
+                return reject(err);
+            }
+            return resolve(JSON.parse(JSON.stringify(result)));
+        })
+    });
+}
+
+/**
+ * 
+ * Create a new order
+ */
+const createOrder = (Email, OrderDate, ShipDate, ItemSubtotal, ShipCost, Tax, EstDelivery, Street, City, Province, Postal, IsCancelled) => {
+    let SQLquery = 'insert into `Order`(OrderID, Customer_Email, OrderDate, ShipDate, ItemsCost, ShipCost, Tax, EstDeliveryDate, Street, City, Province, Postal, IsCancelled) values (default, "' +Email + '", "' + OrderDate +'", "' +ShipDate+'", ' +ItemSubtotal+', ' +ShipCost+', ' +Tax+', "' +EstDelivery + '", "' +Street + '","' + City+'","' + Province+'","' + Postal+'",' + IsCancelled+')';
+    console.log(SQLquery);
+    return new Promise((resolve, reject) => {
+        con.query(SQLquery, (err, result) => {
+            if(err){
+                console.log(err);
+                return reject(err);
+            }
+            return resolve(JSON.parse(JSON.stringify(result)));
+        })
+    });
+}
+
+/**
+ * 
+ * Add to order
+ */
+const addToOrder = (orderID, itemID, itemSKU) => {
+    let SQLquery = 'insert into order_contains(OrderID, ItemID, ItemSKU) values ('+orderID+','+itemID+','+itemSKU+' )';
+    console.log(SQLquery);
+    return new Promise((resolve, reject) => {
+        con.query(SQLquery, (err, result) => {
+            if(err){
+                console.log(err);
+                return reject(err);
+            }
+            return resolve(JSON.parse(JSON.stringify(result)));
+        })
+    });
+}
+
+/**
+ * 
+ * Create a new order
+ */
+const getOrderID = () => {
+    let SQLquery = 'select last_insert_id()';
     return new Promise((resolve, reject) => {
         con.query(SQLquery, (err, result) => {
             if(err){
@@ -238,4 +290,7 @@ module.exports = {
     getProductsFromBrand,
     getCategoriesFromDepartment,
     getProductsFromCategory,
+    createOrder,
+    addToOrder,
+    getOrderID,
 };

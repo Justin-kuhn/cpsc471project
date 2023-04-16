@@ -17,6 +17,7 @@ function Login() {
       const data = await LoginAPI(username,password,email);
       window.location.href = "./home";
       sessionStorage.setItem("loggedInUser", username);
+      sessionStorage.setItem("loggedInEmail", email);
     } catch (error) {
       console.error(error);
     }

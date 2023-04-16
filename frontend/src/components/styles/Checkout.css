@@ -93,52 +93,40 @@ body {
   width:100%;
 }
 
-.card {
+.card2 {
   box-shadow: 0 4px 8px 0 rgb(0, 0, 0);
-  max-width: 300px;
+  width: 500px;
   margin: auto;
   text-align: center;
   font-family: arial;
-  max-height: 400px;
-  transition: all .2s ease-in-out;
+  max-height: 100px;
+  margin-bottom: 70px;
 }
 
-.card:hover {
-  transform: scale(1.09);
-}
-
-.price {
+.price2 {
   color: black;
-  font-size: 22px;
+  font-size: 16px;
+  position:relative;
+  bottom:100px;
+  left:100px;
+  text-align: left;
 }
 
-.description {
-  text-align: center;
+.description2 {
+  text-align: left;
+  width:400px;
   padding-left: 2px;
+  position:relative;
+  bottom:100px;
+  left:100px;
 }
 
-.card button {
-  border: none;
-  outline: 0;
-  padding: 12px;
-  color: white;
-  background-color: #000;
-  text-align: center;
-  cursor: pointer;
-  width: 100%;
-  font-size: 18px;
-}
-
-.card button:hover {
-  opacity: 0.7;
-}
-
-#catalogue {
+#catalogue2 {
   position:relative;
   display:grid;
-  grid-template: 500px / auto auto auto;
+  grid-template: 200px / auto;
   top:50px;
-  right:0px;
+  right:400px;
 }
 
 .myorder-text{
@@ -147,10 +135,12 @@ body {
   right:100px;
 }
 
-.img2 {
+.img2-confirm {
+  position:relative;
+  right:200px;
   object-fit: cover;
-  width:230px;
-  height:230px;
+  width:100px;
+  height:100px;
 }
 
 .dropbtn {
@@ -205,4 +195,89 @@ body {
 
 .checkout-button:hover {
   background-color: red;
+}
+
+.payment-form {
+  background-color: #D9D9D9;
+  width:700px;
+  height:800px;
+  position: absolute;
+  left:650px;
+  z-index: 1000;
+}
+
+.payment-form h1{
+  position: absolute;
+  font-size: 30px;
+  left:230px;
+}
+
+.payment-label{
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.city-field{
+  position: relative;
+  top:100px;
+  left:50px;
+}
+
+.province-field{
+  position: relative;
+  top:63px;
+  left:320px;
+}
+
+.street-field{
+  position: relative;
+  top:100px;
+  left:35px;
+}
+
+.postal-field{
+  position: relative;
+  top:63px;
+  left:297px;
+}
+
+.card-field{
+  position: relative;
+  top:20px;
+  left:297px;
+}
+
+.item-subtotal {
+  font-size: 20px;
+  position:relative;
+  left:20px;
+  top:120px;
+}
+
+.ship-cost {
+  font-size: 20px;
+  position:relative;
+  left:20px;
+  top:160px;
+}
+
+.tax {
+  font-size: 20px;
+  position:relative;
+  left:20px;
+  top:200px;
+}
+
+.grand-total {
+  font-size: 28px;
+  position:relative;
+  left:20px;
+  top:250px;
+}
+
+#order-button {
+  padding:10px;
+  position:relative;
+  left:400px;
+  top:150px;
 }

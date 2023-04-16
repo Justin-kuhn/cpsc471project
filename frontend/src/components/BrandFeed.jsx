@@ -41,8 +41,8 @@ function BrandFeed() {
     sessionStorage.clear();
   }
 
-  const addToCart = (id, description, price, brandname, filename) => {
-    const cart = [id, description, price, brandname, filename];
+  const addToCart = (id, description, price, brandname, filename, sku_num) => {
+    const cart = [id, description, price, brandname, filename, sku_num];
     if(sessionStorage.getItem("cart") == null){
       sessionStorage.setItem("cart", cart);
     }
@@ -107,7 +107,7 @@ function BrandFeed() {
     <img class="img2" src={require(`./img/${product.FileName}`)} alt=""></img> 
     <p class="description">{product.ItemDescription}</p>
     <p class="price">${product.Price}</p>
-    <p><button onClick={() => {addToCart(product.ItemID, product.ItemDescription, product.Price, product.BrandName, product.FileName);} }>Add to Order</button></p>
+    <p><button onClick={() => {addToCart(product.ItemID, product.ItemDescription, product.Price, product.BrandName, product.FileName, product.SKU_Num);} }>Add to Order</button></p>
   </div>
   ))}
 </div>

@@ -149,6 +149,39 @@ const getCategoryProducts = async (req, res) => {
   } 
 };
 
+  //Create an order
+  const createOrder = async (req, res) => {
+    try{
+      const { email, orderDate, shipDate, itemsCost, shipCost, tax, estDeliveryDate, street, city, province, postal, isCancelled } = req.body;
+      const order = await db.createOrder(email, orderDate, shipDate, itemsCost, shipCost, tax, estDeliveryDate, street, city, province, postal, isCancelled);
+      const id = await db.getOrderID();
+      if(!order)
+      {
+        return res.status(401).json({ message: "The order could not be created" });
+      }
+      res.status(200).json(order);
+    }
+    catch(error){
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+   //Add an item to an order
+   const addToOrder = async (req, res) => {
+    try{
+      const { orderID, itemID, itemSKU } = req.body;
+      const order = await db.addToOrder(orderID, itemID, itemSKU);
+      if(!order)
+      {
+        return res.status(401).json({ message: "The item could not be added" });
+      }
+      res.status(200).json(order);
+    }
+    catch(error){
+      res.status(500).json({ message: error.message });
+    }
+  };
+
 module.exports = {
     registerUser,
     registerAdmin,
@@ -159,4 +192,6 @@ module.exports = {
     getBrandProducts,
     getDepartmentCategories,
     getCategoryProducts,
+    createOrder,
+    addToOrder,
   };
